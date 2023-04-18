@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - include:
+      file: migrations/script-v1.0-create-table-user_entity.yaml
+      relativeToChangeLogFile: true
+  - include:
+      file: migrations/script-v1.0-create-table-file_entity.yaml
+      relativeToChangeLogFile: true
+  - include:
+      file: migrations/script-v1.0-create-table-user_entity_roles.yaml
+      relativeToChangeLogFile: true
+  - include:
+      file: migrations/script-v1.0-fill-table-user_entity.sql
+      relativeToChangeLogFile: true
+  - include:
+      file: migrations/script-v1.0-fill-table-user_entity_roles.sql
+      relativeToChangeLogFile: true

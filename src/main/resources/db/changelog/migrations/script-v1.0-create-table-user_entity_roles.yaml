@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-user_entity_roles
+      author: Kirillov Nikolay
+      changes:
+        - createTable:
+            tableName: user_entity_roles
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: roles_entity_pk
+                    nullable: false
+              - column:
+                  name: roles
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_entity_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: user_roles_fk
+                    referencedTableName: user_entity
+                    referencedColumnNames: id

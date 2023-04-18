@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-user_entity
+      author: Kirillov Nikolay
+      changes:
+        - createTable:
+            tableName: user_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_entity_pk
+                    nullable: false
+              - column:
+                  name: login
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

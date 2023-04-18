@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+
+  database:
+    container_name: database-server
+    image: mysql:latest
+    volumes:
+      - /mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mysqlDataBase
+    ports:
+      - "3308:3306"
+
+  server:
+    container_name: backend-server
+    build: ./
+    image: cloud_storage_backend:latest
+    environment:
+      spring_datasource_url: jdbc:mysql://database:3306/mysqlDataBase
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_LIQUIBASE_URL: jdbc:mysql://database:3306/mysqlDataBase
+      SPRING_LIQUIBASE_USER: root
+      SPRING_LIQUIBASE_PASSWORD: root
+    ports:
+      - "8888:8888"
+    depends_on:
+      - database
+
+  client:
+    container_name: frontend-client
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    image: cloud_storage_frontend:latest
+    ports:
+      - "8080:8080"

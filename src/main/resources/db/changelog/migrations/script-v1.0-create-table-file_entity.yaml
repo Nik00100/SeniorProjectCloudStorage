@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-file_entity
+      author: Kirillov Nikolay
+      changes:
+        - createTable:
+            tableName: file_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: file_entity_pk
+                    nullable: false
+              - column:
+                  name: file_name
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file_type
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file_data
+                  type: MEDIUMBLOB
+                  constraints:
+                    nullable: false
+              - column:
+                  name: hash
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: file_user_fk
+                    referencedTableName: user_entity
+                    referencedColumnNames: id
