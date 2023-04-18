@@ -59,7 +59,7 @@ FRONT приложение использует header `auth-token` в кото�
 - В докере запустятся 3 приложения:
   - backend-server, Java 11 на порту: ```http://localhost:8888```;
   - frontend-client, Node 15 на порту: ```http://localhost:8080```;
-  - database-server на порту: ```http://localhost:3308```
+  - database-server на порту: ```http://localhost:3306```
 
 ### Для тестирования frontend + backend + mysql нужно авторизовать пользователя:
 - Отправить POST запрос `http://localhost:8888/login`
