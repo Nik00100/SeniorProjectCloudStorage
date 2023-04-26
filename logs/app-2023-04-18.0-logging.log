@@ -1,24 +1,24 @@
-2023-04-26 15:42:51,103 INFO [main] org.springframework.boot.StartupInfoLogger: Starting SeniorProjectCloudStorageApplication using Java 11.0.17 on DESKTOP-BI2Q678 with PID 14980 (C:\Users\Nik Kirillov\Desktop\SeniorProjectCloudStorage\target\classes started by Nik Kirillov in C:\Users\Nik Kirillov\Desktop\SeniorProjectCloudStorage)
-2023-04-26 15:42:51,103 INFO [background-preinit] org.hibernate.validator.internal.util.Version: HV000001: Hibernate Validator 6.2.5.Final
-2023-04-26 15:42:51,108 DEBUG [main] org.springframework.boot.StartupInfoLogger: Running with Spring Boot v2.7.5, Spring v5.3.23
-2023-04-26 15:42:51,109 INFO [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
-2023-04-26 15:42:51,727 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Multiple Spring Data modules found, entering strict repository configuration mode
-2023-04-26 15:42:51,728 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2023-04-26 15:42:51,755 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport: Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ru.kirillov.seniorproject_backend.repository.FileRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2023-04-26 15:42:51,757 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport: Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ru.kirillov.seniorproject_backend.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2023-04-26 15:42:51,759 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Finished Spring Data repository scanning in 26 ms. Found 0 JDBC repository interfaces.
-2023-04-26 15:42:51,767 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Multiple Spring Data modules found, entering strict repository configuration mode
-2023-04-26 15:42:51,767 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-26 15:42:51,798 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Finished Spring Data repository scanning in 27 ms. Found 2 JPA repository interfaces.
-2023-04-26 15:42:52,362 INFO [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8888 (http)
-2023-04-26 15:42:52,371 INFO [main] org.apache.juli.logging.DirectJDKLog: Initializing ProtocolHandler ["http-nio-8888"]
-2023-04-26 15:42:52,371 INFO [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
-2023-04-26 15:42:52,371 INFO [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.68]
-2023-04-26 15:42:52,481 INFO [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
-2023-04-26 15:42:52,481 INFO [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 1334 ms
-2023-04-26 15:42:52,522 DEBUG [main] org.springframework.web.filter.GenericFilterBean: Filter 'JWTFilter' configured for use
-2023-04-26 15:42:52,720 INFO [main] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Starting...
-2023-04-26 15:42:54,079 ERROR [main] com.zaxxer.hikari.pool.HikariPool: HikariPool-1 - Exception during pool initialization.
+2023-04-18 13:05:10,752 INFO [background-preinit] org.hibernate.validator.internal.util.Version: HV000001: Hibernate Validator 6.2.5.Final
+2023-04-18 13:05:10,751 INFO [main] org.springframework.boot.StartupInfoLogger: Starting SeniorProjectCloudStorageApplication using Java 11.0.17 on DESKTOP-BI2Q678 with PID 5468 (C:\Users\Nik Kirillov\Desktop\SeniorProjectCloudStorage\target\classes started by Nik Kirillov in C:\Users\Nik Kirillov\Desktop\SeniorProjectCloudStorage)
+2023-04-18 13:05:10,756 DEBUG [main] org.springframework.boot.StartupInfoLogger: Running with Spring Boot v2.7.5, Spring v5.3.23
+2023-04-18 13:05:10,757 INFO [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+2023-04-18 13:05:11,289 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-18 13:05:11,290 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-04-18 13:05:11,313 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport: Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ru.kirillov.seniorproject_backend.repository.FileRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-04-18 13:05:11,315 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport: Spring Data JDBC - Could not safely identify store assignment for repository candidate interface ru.kirillov.seniorproject_backend.repository.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-04-18 13:05:11,315 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Finished Spring Data repository scanning in 22 ms. Found 0 JDBC repository interfaces.
+2023-04-18 13:05:11,321 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-18 13:05:11,321 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-18 13:05:11,347 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate: Finished Spring Data repository scanning in 24 ms. Found 2 JPA repository interfaces.
+2023-04-18 13:05:11,842 INFO [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8888 (http)
+2023-04-18 13:05:11,848 INFO [main] org.apache.juli.logging.DirectJDKLog: Initializing ProtocolHandler ["http-nio-8888"]
+2023-04-18 13:05:11,849 INFO [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
+2023-04-18 13:05:11,849 INFO [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.68]
+2023-04-18 13:05:11,944 INFO [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
+2023-04-18 13:05:11,944 INFO [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 1160 ms
+2023-04-18 13:05:11,980 DEBUG [main] org.springframework.web.filter.GenericFilterBean: Filter 'JWTFilter' configured for use
+2023-04-18 13:05:12,108 INFO [main] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Starting...
+2023-04-18 13:05:13,368 ERROR [main] com.zaxxer.hikari.pool.HikariPool: HikariPool-1 - Exception during pool initialization.
 java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
@@ -54,12 +54,12 @@ java.sql.SQLException: Access denied for user 'root'@'localhost' (using password
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
 	at ru.kirillov.seniorproject_backend.SeniorProjectCloudStorageApplication.main(SeniorProjectCloudStorageApplication.java:10)
-2023-04-26 15:42:54,082 WARN [main] org.springframework.context.support.AbstractApplicationContext: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Invocation of init method failed; nested exception is liquibase.exception.DatabaseException: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
-2023-04-26 15:42:54,085 INFO [main] org.apache.juli.logging.DirectJDKLog: Stopping service [Tomcat]
-2023-04-26 15:42:54,096 INFO [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener: 
+2023-04-18 13:05:13,370 WARN [main] org.springframework.context.support.AbstractApplicationContext: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Invocation of init method failed; nested exception is liquibase.exception.DatabaseException: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+2023-04-18 13:05:13,372 INFO [main] org.apache.juli.logging.DirectJDKLog: Stopping service [Tomcat]
+2023-04-18 13:05:13,381 INFO [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener: 
 
 Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2023-04-26 15:42:54,114 ERROR [main] org.springframework.boot.SpringApplication: Application run failed
+2023-04-18 13:05:13,396 ERROR [main] org.springframework.boot.SpringApplication: Application run failed
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Invocation of init method failed; nested exception is liquibase.exception.DatabaseException: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
@@ -101,3 +101,6 @@ Caused by: java.sql.SQLException: Access denied for user 'root'@'localhost' (usi
 	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
 	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:266)
 	... 20 common frames omitted
+2023-04-18 13:38:41,682 INFO [main] org.springframework.test.context.support.AbstractTestContextBootstrapper: Neither @ContextConfiguration nor @ContextHierarchy found for test class [ru.kirillov.seniorprojectcloudstorage.controller.AuthenticationControllerTest], using SpringBootContextLoader
+2023-04-18 13:38:41,688 INFO [main] org.springframework.test.context.support.AbstractContextLoader: Could not detect default resource locations for test class [ru.kirillov.seniorprojectcloudstorage.controller.AuthenticationControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2023-04-18 13:38:41,689 INFO [main] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils: Could not detect default configuration classes for test class [ru.kirillov.seniorprojectcloudstorage.controller.AuthenticationControllerTest]: AuthenticationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.

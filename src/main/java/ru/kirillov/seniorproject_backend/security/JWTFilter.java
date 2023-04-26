@@ -31,7 +31,7 @@ public class JWTFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String token = getTokenFromRequest((HttpServletRequest) servletRequest);
         if (token != null && jwtToken.validateAccessToken(token)) {
-            log.info("Токен действителен: {}", token);
+
             Claims claims = jwtToken.getAccessClaims(token);
 
             JWTAuthentication jwtInfoToken = new JWTAuthentication();

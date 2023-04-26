@@ -6,6 +6,9 @@ import io.jsonwebtoken.security.Keys;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import ru.kirillov.seniorproject_backend.config.AuthenticationConfigConstants;
 import ru.kirillov.seniorproject_backend.entity.UserEntity;
@@ -17,6 +20,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -37,7 +41,7 @@ public class JWTToken {
     }
 
     public String generateToken(@NonNull UserEntity userEntity) throws IllegalArgumentException {
-        this.userEntity = userEntity;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Date now = new Date();
         Date exp = Date.from(LocalDateTime.now().plusMinutes(tokenLifetime)
                 .atZone(ZoneId.systemDefault()).toInstant());
@@ -49,10 +53,13 @@ public class JWTToken {
                 .setNotBefore(now)
                 .setExpiration(exp)
                 .signWith(secret)
-                .claim("roles", userEntity.getRoles())
+                .claim("roles",
+                        authentication.getAuthorities().stream()
+                                .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .compact();
-        log.info("Auth-token {} добавлен в список активных токеннов", token);
+
         listTokens.add(token);
+        this.userEntity = userEntity;
         return token;
     }
 
