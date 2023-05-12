@@ -18,7 +18,7 @@ import ru.kirillov.seniorproject_backend.entity.FileEntity;
 import ru.kirillov.seniorproject_backend.entity.UserEntity;
 import ru.kirillov.seniorproject_backend.model.FileBody;
 import ru.kirillov.seniorproject_backend.repository.FileRepository;
-import ru.kirillov.seniorproject_backend.security.JWTToken;
+import ru.kirillov.seniorproject_backend.security.JWTProvider;
 import ru.kirillov.seniorproject_backend.service.FileService;
 
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class FileServiceTest {
     @MockBean
     private FileRepository fileRepository;
     @MockBean
-    private JWTToken jwtToken;
+    private JWTProvider jwtProvider;
     private UserEntity user;
     private FileEntity file;
 
@@ -59,7 +59,7 @@ public class FileServiceTest {
         MultipartFile multipartFile =
                 new MockMultipartFile("file", MY_FILE_NAME,
                         MediaType.TEXT_PLAIN_VALUE, "Cloud_storage".getBytes());
-        Mockito.when(jwtToken.getAuthenticatedUser()).thenReturn(user);
+        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFileByUserEntityIdAndFileName(1L, MY_FILE_NAME))
                 .thenReturn(Optional.empty());
         Mockito.when(fileRepository.findFileByUserEntityIdAndHash(1L, hash))
@@ -82,7 +82,7 @@ public class FileServiceTest {
     @Test
     void test_getFile() {
 
-        Mockito.when(jwtToken.getAuthenticatedUser()).thenReturn(user);
+        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFileByUserEntityIdAndFileName(1L, MY_FILE_NAME))
                 .thenReturn(Optional.ofNullable(file));
 
@@ -94,7 +94,7 @@ public class FileServiceTest {
     @Test
     void test_renameFile() {
         FileBody newName = new FileBody("newFileName.txt");
-        Mockito.when(jwtToken.getAuthenticatedUser()).thenReturn(user);
+        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFileByUserEntityIdAndFileName(1L, MY_FILE_NAME))
                 .thenReturn(Optional.ofNullable(file));
 
@@ -105,7 +105,7 @@ public class FileServiceTest {
 
     @Test
     void test_deleteFile() {
-        Mockito.when(jwtToken.getAuthenticatedUser()).thenReturn(user);
+        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFileByUserEntityIdAndFileName(1L, MY_FILE_NAME))
                 .thenReturn(Optional.ofNullable(file));
 
@@ -121,7 +121,7 @@ public class FileServiceTest {
                 FileEntity.builder().size(1111L).fileName("file1.txt").build(),
                 FileEntity.builder().size(2222L).fileName("file2.txt").build(),
                 FileEntity.builder().size(3333L).fileName("file3.txt").build());
-        Mockito.when(jwtToken.getAuthenticatedUser()).thenReturn(user);
+        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFilesByUserIdWithLimit(user.getId(), limit)).thenReturn(listFile);
 
         List<FileDto> files = fileService.getAllFiles(limit);

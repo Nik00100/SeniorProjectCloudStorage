@@ -25,14 +25,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JWTFilter extends GenericFilterBean {
 
-    private final JWTToken jwtToken;
+    private final JWTProvider jwtProvider;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String token = getTokenFromRequest((HttpServletRequest) servletRequest);
-        if (token != null && jwtToken.validateAccessToken(token)) {
+        if (token != null && jwtProvider.validateAccessToken(token)) {
 
-            Claims claims = jwtToken.getAccessClaims(token);
+            Claims claims = jwtProvider.getAccessClaims(token);
 
             JWTAuthentication jwtInfoToken = new JWTAuthentication();
             jwtInfoToken.setRoles(getRoles(claims));

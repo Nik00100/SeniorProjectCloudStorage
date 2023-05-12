@@ -18,7 +18,7 @@ import ru.kirillov.seniorproject_backend.dto.UserDto;
 import ru.kirillov.seniorproject_backend.entity.UserEntity;
 import ru.kirillov.seniorproject_backend.model.Token;
 import ru.kirillov.seniorproject_backend.repository.UserRepository;
-import ru.kirillov.seniorproject_backend.security.JWTToken;
+import ru.kirillov.seniorproject_backend.security.JWTProvider;
 import ru.kirillov.seniorproject_backend.service.AuthenticationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +37,7 @@ public class AuthenticationServiceTest {
     @MockBean
     private UserRepository userRepository;
     @MockBean
-    private JWTToken jwtToken;
+    private JWTProvider jwtProvider;
     @MockBean
     private PasswordEncoder passwordEncoder;
     private HttpServletRequest request;
@@ -65,7 +65,7 @@ public class AuthenticationServiceTest {
     public void test_authenticationLogin() {
         Mockito.when(userRepository.findUserByLogin(userDto.getLogin())).thenReturn(Optional.ofNullable(userEntity));
         Mockito.when(passwordEncoder.matches(userDto.getPassword(), userEntity.getPassword())).thenReturn(true);
-        Mockito.when(jwtToken.generateToken(userEntity)).thenReturn(VALUE_TOKEN);
+        Mockito.when(jwtProvider.generateToken(userEntity)).thenReturn(VALUE_TOKEN);
 
         Token generatedToken = authenticationService.authenticationLogin(userDto);
 

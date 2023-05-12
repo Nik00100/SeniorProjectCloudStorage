@@ -13,7 +13,7 @@ import ru.kirillov.seniorproject_backend.exception.IncorrectDataEntry;
 import ru.kirillov.seniorproject_backend.exception.UserNotFoundException;
 import ru.kirillov.seniorproject_backend.model.Token;
 import ru.kirillov.seniorproject_backend.repository.UserRepository;
-import ru.kirillov.seniorproject_backend.security.JWTToken;
+import ru.kirillov.seniorproject_backend.security.JWTProvider;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthenticationService {
 
     private final UserRepository userRepository;
-    private final JWTToken jwtToken;
+    private final JWTProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
 
     public Token authenticationLogin(UserDto userDto) {
@@ -32,7 +32,7 @@ public class AuthenticationService {
         final UserEntity userFromDatabase = userRepository.findUserByLogin(userDto.getLogin()).orElseThrow(()
                 -> new UserNotFoundException("Пользователь не найден", 0));
         if (passwordEncoder.matches(userDto.getPassword(), userFromDatabase.getPassword())) {
-            final String token = jwtToken.generateToken(userFromDatabase);
+            final String token = jwtProvider.generateToken(userFromDatabase);
             return new Token(token);
         } else {
             throw new IncorrectDataEntry("Неправильный пароль", 0);
@@ -49,7 +49,7 @@ public class AuthenticationService {
             return null;
         }
         securityContextLogoutHandler.logout(request, response, auth);
-        jwtToken.removeToken(authToken);
+        jwtProvider.removeToken(authToken);
         log.info("Токен пользователя: {} удален из списка активных токеннов. Auth-token: {}", userEntity, authToken);
         return userEntity.getLogin();
     }

@@ -12,7 +12,7 @@ import ru.kirillov.seniorproject_backend.exception.FileNotFoundException;
 import ru.kirillov.seniorproject_backend.exception.IncorrectDataEntry;
 import ru.kirillov.seniorproject_backend.model.FileBody;
 import ru.kirillov.seniorproject_backend.repository.FileRepository;
-import ru.kirillov.seniorproject_backend.security.JWTToken;
+import ru.kirillov.seniorproject_backend.security.JWTProvider;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -28,11 +28,11 @@ import java.util.stream.Collectors;
 public class FileService {
 
     private final FileRepository fileRepository;
-    private final JWTToken jwtToken;
+    private final JWTProvider jwtProvider;
 
     @Transactional
     public void addFile(MultipartFile file, String fileName) {
-        Long userID = jwtToken.getAuthenticatedUser().getId();
+        Long userID = jwtProvider.getAuthenticatedUser().getId();
 
         log.info("Поиск файла в хранилище по имени файла {} и идентификатору {}", fileName, userID);
         fileRepository.findFileByUserEntityIdAndFileName(userID, fileName).ifPresent(s -> {
@@ -92,7 +92,7 @@ public class FileService {
 
     @Transactional
     public FileDto getFile(String fileName) {
-        Long userID = jwtToken.getAuthenticatedUser().getId();
+        Long userID = jwtProvider.getAuthenticatedUser().getId();
 
         log.info("Поиск файла в базе данных по имени файла: {} и Id пользователя: {}", fileName, userID);
         FileEntity file = fileRepository.findFileByUserEntityIdAndFileName(userID, fileName).orElseThrow(() -> new FileNotFoundException(
@@ -107,7 +107,7 @@ public class FileService {
     }
 
     public void renameFile(String fileName, FileBody fileBody) {
-        Long userID = jwtToken.getAuthenticatedUser().getId();
+        Long userID = jwtProvider.getAuthenticatedUser().getId();
 
         log.info("Поиск файла для переименования в базе данных по имени файла: {} и Id пользователя: {}", fileName, userID);
         FileEntity fileToRename = fileRepository.findFileByUserEntityIdAndFileName(userID, fileName)
@@ -126,7 +126,7 @@ public class FileService {
     }
 
     public void deleteFile(String fileName) {
-        Long userID = jwtToken.getAuthenticatedUser().getId();
+        Long userID = jwtProvider.getAuthenticatedUser().getId();
 
         log.info("Поиск файла для удаления в базе данных по имени файла: {} и Id пользователя: {}", fileName, userID);
         FileEntity fileFromStorage = fileRepository.findFileByUserEntityIdAndFileName(userID, fileName).orElseThrow(() -> new FileNotFoundException(
@@ -137,7 +137,7 @@ public class FileService {
     }
 
     public List<FileDto> getAllFiles(int limit) {
-        Long userId = jwtToken.getAuthenticatedUser().getId();
+        Long userId = jwtProvider.getAuthenticatedUser().getId();
 
         log.info("Поиск всех файлов в базе данных по Id пользователя: {} и лимиту вывода: {}", userId, limit);
         List<FileEntity> listFiles = fileRepository.findFilesByUserIdWithLimit(userId, limit);

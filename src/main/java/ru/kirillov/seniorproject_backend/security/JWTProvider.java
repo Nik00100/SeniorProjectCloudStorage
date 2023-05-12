@@ -24,14 +24,14 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class JWTToken {
+public class JWTProvider {
 
     private final SecretKey secret;
     private final int tokenLifetime;
     private final List<String> listTokens = new ArrayList<>();
     private UserEntity userEntity;
 
-    public JWTToken(@Value("${jwt.secret.access}") String secret, @Value("${TOKEN_LIFETIME}") int tokenLifetime) {
+    public JWTProvider(@Value("${jwt.secret.access}") String secret, @Value("${TOKEN_LIFETIME}") int tokenLifetime) {
         this.secret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         this.tokenLifetime = tokenLifetime;
     }
