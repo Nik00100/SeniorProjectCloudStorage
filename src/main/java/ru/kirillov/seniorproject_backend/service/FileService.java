@@ -2,6 +2,8 @@ package ru.kirillov.seniorproject_backend.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,7 +14,6 @@ import ru.kirillov.seniorproject_backend.exception.FileNotFoundException;
 import ru.kirillov.seniorproject_backend.exception.IncorrectDataEntry;
 import ru.kirillov.seniorproject_backend.model.FileBody;
 import ru.kirillov.seniorproject_backend.repository.FileRepository;
-import ru.kirillov.seniorproject_backend.security.JWTProvider;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -28,11 +29,16 @@ import java.util.stream.Collectors;
 public class FileService {
 
     private final FileRepository fileRepository;
-    private final JWTProvider jwtProvider;
+    private Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    private UserEntity userEntity = (UserEntity) authentication.getPrincipal();
+
+    //private final JWTProvider jwtProvider;
 
     @Transactional
     public void addFile(MultipartFile file, String fileName) {
-        Long userID = jwtProvider.getAuthenticatedUser().getId();
+        //Long userID = jwtProvider.getAuthenticatedUser().getId();
+
+        Long userID = userEntity.getId();
 
         log.info("Поиск файла в хранилище по имени файла {} и идентификатору {}", fileName, userID);
         fileRepository.findFileByUserEntityIdAndFileName(userID, fileName).ifPresent(s -> {
@@ -92,7 +98,9 @@ public class FileService {
 
     @Transactional
     public FileDto getFile(String fileName) {
-        Long userID = jwtProvider.getAuthenticatedUser().getId();
+        //Long userID = jwtProvider.getAuthenticatedUser().getId();
+
+        Long userID = userEntity.getId();
 
         log.info("Поиск файла в базе данных по имени файла: {} и Id пользователя: {}", fileName, userID);
         FileEntity file = fileRepository.findFileByUserEntityIdAndFileName(userID, fileName).orElseThrow(() -> new FileNotFoundException(
@@ -107,7 +115,9 @@ public class FileService {
     }
 
     public void renameFile(String fileName, FileBody fileBody) {
-        Long userID = jwtProvider.getAuthenticatedUser().getId();
+        //Long userID = jwtProvider.getAuthenticatedUser().getId();
+
+        Long userID = userEntity.getId();
 
         log.info("Поиск файла для переименования в базе данных по имени файла: {} и Id пользователя: {}", fileName, userID);
         FileEntity fileToRename = fileRepository.findFileByUserEntityIdAndFileName(userID, fileName)
@@ -126,7 +136,9 @@ public class FileService {
     }
 
     public void deleteFile(String fileName) {
-        Long userID = jwtProvider.getAuthenticatedUser().getId();
+        //Long userID = jwtProvider.getAuthenticatedUser().getId();
+
+        Long userID = userEntity.getId();
 
         log.info("Поиск файла для удаления в базе данных по имени файла: {} и Id пользователя: {}", fileName, userID);
         FileEntity fileFromStorage = fileRepository.findFileByUserEntityIdAndFileName(userID, fileName).orElseThrow(() -> new FileNotFoundException(
@@ -137,12 +149,14 @@ public class FileService {
     }
 
     public List<FileDto> getAllFiles(int limit) {
-        Long userId = jwtProvider.getAuthenticatedUser().getId();
+        //Long userID = jwtProvider.getAuthenticatedUser().getId();
 
-        log.info("Поиск всех файлов в базе данных по Id пользователя: {} и лимиту вывода: {}", userId, limit);
-        List<FileEntity> listFiles = fileRepository.findFilesByUserIdWithLimit(userId, limit);
+        Long userID = userEntity.getId();
 
-        log.info("Все файлы в базе данных по Id пользователя: {} и лимиту вывода: {} найдены | Список файлов: {}", userId, limit, listFiles);
+        log.info("Поиск всех файлов в базе данных по Id пользователя: {} и лимиту вывода: {}", userID, limit);
+        List<FileEntity> listFiles = fileRepository.findFilesByUserIdWithLimit(userID, limit);
+
+        log.info("Все файлы в базе данных по Id пользователя: {} и лимиту вывода: {} найдены | Список файлов: {}", userID, limit, listFiles);
         return listFiles.stream()
                 .map(file -> FileDto.builder()
                         .fileName(file.getFileName())
