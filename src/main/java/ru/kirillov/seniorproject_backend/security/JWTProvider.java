@@ -29,16 +29,16 @@ public class JWTProvider {
     private final SecretKey secret;
     private final int tokenLifetime;
     private final List<String> listTokens = new ArrayList<>();
-    private UserEntity userEntity;
+    //private UserEntity userEntity;
 
     public JWTProvider(@Value("${jwt.secret.access}") String secret, @Value("${TOKEN_LIFETIME}") int tokenLifetime) {
         this.secret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         this.tokenLifetime = tokenLifetime;
     }
 
-    public UserEntity getAuthenticatedUser() {
-        return userEntity;
-    }
+//    public UserEntity getAuthenticatedUser() {
+//        return userEntity;
+//    }
 
     public String generateToken(@NonNull UserEntity userEntity) throws IllegalArgumentException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -59,7 +59,7 @@ public class JWTProvider {
                 .compact();
 
         listTokens.add(token);
-        this.userEntity = userEntity;
+        //this.userEntity = userEntity;
         return token;
     }
 
