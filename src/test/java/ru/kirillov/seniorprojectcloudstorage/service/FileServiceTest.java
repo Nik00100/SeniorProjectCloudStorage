@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.multipart.MultipartFile;
+import ru.kirillov.seniorproject_backend.SeniorProjectCloudStorageApplication;
 import ru.kirillov.seniorproject_backend.dto.FileDto;
 import ru.kirillov.seniorproject_backend.entity.FileEntity;
 import ru.kirillov.seniorproject_backend.entity.UserEntity;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(classes = SeniorProjectCloudStorageApplication.class)
 public class FileServiceTest {
 
     private static final String MY_FILE_NAME = "fileName.txt";
@@ -34,8 +35,6 @@ public class FileServiceTest {
     private FileService fileService;
     @MockBean
     private FileRepository fileRepository;
-    @MockBean
-    private JWTProvider jwtProvider;
     private UserEntity user;
     private FileEntity file;
 
@@ -59,7 +58,6 @@ public class FileServiceTest {
         MultipartFile multipartFile =
                 new MockMultipartFile("file", MY_FILE_NAME,
                         MediaType.TEXT_PLAIN_VALUE, "Cloud_storage".getBytes());
-        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFileByUserEntityIdAndFileName(1L, MY_FILE_NAME))
                 .thenReturn(Optional.empty());
         Mockito.when(fileRepository.findFileByUserEntityIdAndHash(1L, hash))
@@ -82,7 +80,6 @@ public class FileServiceTest {
     @Test
     void test_getFile() {
 
-        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFileByUserEntityIdAndFileName(1L, MY_FILE_NAME))
                 .thenReturn(Optional.ofNullable(file));
 
@@ -94,7 +91,6 @@ public class FileServiceTest {
     @Test
     void test_renameFile() {
         FileBody newName = new FileBody("newFileName.txt");
-        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFileByUserEntityIdAndFileName(1L, MY_FILE_NAME))
                 .thenReturn(Optional.ofNullable(file));
 
@@ -105,7 +101,6 @@ public class FileServiceTest {
 
     @Test
     void test_deleteFile() {
-        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFileByUserEntityIdAndFileName(1L, MY_FILE_NAME))
                 .thenReturn(Optional.ofNullable(file));
 
@@ -121,7 +116,6 @@ public class FileServiceTest {
                 FileEntity.builder().size(1111L).fileName("file1.txt").build(),
                 FileEntity.builder().size(2222L).fileName("file2.txt").build(),
                 FileEntity.builder().size(3333L).fileName("file3.txt").build());
-        Mockito.when(jwtProvider.getAuthenticatedUser()).thenReturn(user);
         Mockito.when(fileRepository.findFilesByUserIdWithLimit(user.getId(), limit)).thenReturn(listFile);
 
         List<FileDto> files = fileService.getAllFiles(limit);

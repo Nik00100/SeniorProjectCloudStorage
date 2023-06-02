@@ -2,16 +2,19 @@ package ru.kirillov.seniorprojectcloudstorage.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
+import ru.kirillov.seniorproject_backend.SeniorProjectCloudStorageApplication;
 import ru.kirillov.seniorproject_backend.controller.FileController;
 import ru.kirillov.seniorproject_backend.dto.FileDto;
 import ru.kirillov.seniorproject_backend.model.FileBody;
@@ -24,7 +27,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = SeniorProjectCloudStorageApplication.class)
 @AutoConfigureMockMvc
 public class FileControllerTest {
 

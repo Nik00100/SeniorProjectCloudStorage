@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 import ru.kirillov.seniorproject_backend.config.AuthenticationConfigConstants;
+import ru.kirillov.seniorproject_backend.entity.UserEntity;
 import ru.kirillov.seniorproject_backend.enums.Role;
 
 import javax.servlet.FilterChain;
@@ -36,12 +37,22 @@ public class JWTFilter extends GenericFilterBean {
 
             JWTAuthentication jwtInfoToken = new JWTAuthentication();
             jwtInfoToken.setRoles(getRoles(claims));
-            jwtInfoToken.setUsername(claims.getSubject());
+            jwtInfoToken.setUserEntity(getUserEntityFromClaims(claims));
             jwtInfoToken.setAuthenticated(true);
-
             SecurityContextHolder.getContext().setAuthentication(jwtInfoToken);
         }
         filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    private UserEntity getUserEntityFromClaims(Claims claims) {
+        String login = claims.getSubject();
+        String userID = claims.getId();
+
+        UserEntity user = new UserEntity();
+        user.setId(Long.parseLong(userID));
+        user.setLogin(login);
+
+        return user;
     }
 
     private String getTokenFromRequest(HttpServletRequest request) {

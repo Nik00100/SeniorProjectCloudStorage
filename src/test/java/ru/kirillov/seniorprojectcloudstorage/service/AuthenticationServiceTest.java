@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import ru.kirillov.seniorproject_backend.SeniorProjectCloudStorageApplication;
 import ru.kirillov.seniorproject_backend.dto.UserDto;
 import ru.kirillov.seniorproject_backend.entity.UserEntity;
 import ru.kirillov.seniorproject_backend.model.Token;
@@ -26,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = SeniorProjectCloudStorageApplication.class)
 @ContextConfiguration
-@SpringBootTest
 public class AuthenticationServiceTest {
 
     private static final String AUTH_TOKEN = "auth-token";

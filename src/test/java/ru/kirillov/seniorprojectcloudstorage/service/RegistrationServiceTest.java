@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import ru.kirillov.seniorproject_backend.SeniorProjectCloudStorageApplication;
 import ru.kirillov.seniorproject_backend.dto.UserDto;
 import ru.kirillov.seniorproject_backend.entity.UserEntity;
 import ru.kirillov.seniorproject_backend.enums.Role;
@@ -19,7 +20,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(classes = SeniorProjectCloudStorageApplication.class)
 public class RegistrationServiceTest {
 
     @Autowired

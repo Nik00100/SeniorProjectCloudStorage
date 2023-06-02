@@ -3,6 +3,7 @@ package ru.kirillov.seniorproject_backend.security;
 import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import ru.kirillov.seniorproject_backend.entity.UserEntity;
 import ru.kirillov.seniorproject_backend.enums.Role;
 
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Set;
 public class JWTAuthentication implements Authentication {
 
     private boolean authenticated;
-    private String username;
+    private UserEntity userEntity;
     private String firstName;
     private Set<Role> roles;
 
@@ -33,7 +34,7 @@ public class JWTAuthentication implements Authentication {
 
     @Override
     public Object getPrincipal() {
-        return username;
+        return userEntity;
     }
 
     @Override
